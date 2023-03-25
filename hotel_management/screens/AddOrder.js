@@ -1,14 +1,16 @@
 import {StyleSheet,Text,View,TextInput,TouchableOpacity,ToastAndroid,}
  from "react-native";
   import React, { useState } from "react";
-  import { db } from "../firebase-config/firebase-config";
+  //import { db } from "../firebase-config/firebase-config";
   import { useNavigation } from "@react-navigation/native";
-  import { collection, addDoc } from "firebase/firestore";
+  import { collection, addDoc, getFirestore } from "firebase/firestore";
 import { FlatList } from "react-native-gesture-handler";
+import {db} from "../config";
   
   export default function AddOrder() {
     const [data, setData] = useState("");
     const navigation = useNavigation();
+    const db = getFirestore(db);
     const DatCollectinRef = collection(db, "OrderDetails"); //database collection reference
   
     //inputs handle function

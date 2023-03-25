@@ -1,4 +1,5 @@
 import {
+
   StyleSheet,Text,View,TextInput,Image,Picker,TouchableOpacity,ScrollView,ToastAndroid,}
 from "react-native";
 import React, { useState } from "react";
@@ -16,6 +17,26 @@ export default function AddMenuItems() {
   const handleChangeText = (ItemName, value) => {
     setData((prevState) => ({ ...prevState, [ItemName]: value }));
   };
+
+
+    StyleSheet,Text,View,TextInput,Image,Picker,TouchableOpacity,ScrollView,ToastAndroid,}
+  from "react-native";
+  import React, { useState } from "react";
+  //import { db } from "../firebase-config/firebase-config";
+  import { useNavigation } from "@react-navigation/native";
+  import { collection, addDoc, getFirestore } from "firebase/firestore";
+  import {db} from "../config";
+  export default function AddMenuItems() {
+    const [data, setData] = useState("");
+    const navigation = useNavigation();
+
+    const db = getFirestore(db);
+    const DatCollectinRef = collection(db, "MenuItems"); //database collection reference
+  
+    //inputs handle function
+    const handleChangeText = (ItemName, value) => {
+      setData((prevState) => ({ ...prevState, [ItemName]: value }));
+    };
 
   
   //create user function,include firebase methods

@@ -7,6 +7,8 @@ import Home from "./screens/Home";
 import AddEvents from "./screens/AddEvents";
 import ViewEvents from "./screens/ViewEvents";
 import UpdateEvents from "./screens/UpdateEvents";
+import BalconyRoominfo from "./screens/BalconyRoominfo";
+import BalconyRoominfo from "./screens/BalconyRoominfo";
 
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
         <Stack.Screen name="AddEvents" component={AddEvents} />
         <Stack.Screen name="ViewEvents" component={ViewEvents} />
         <Stack.Screen name="UpdateEvents" component={UpdateEvents} />
+        <Stack.Screen name="BalconyRoominfo" component={BalconyRoominfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-  import { useNavigation } from "@react-navigation/native";
-  import { db } from "../firebase-config/firebase-config";
+  //import { useNavigation } from "@react-navigation/native";
+  //import { db } from "../firebase-config/firebase-config";
   import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
-
+  import {db} from "../config";
   
 const data = [
   {

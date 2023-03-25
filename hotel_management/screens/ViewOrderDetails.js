@@ -2,12 +2,14 @@ import {StyleSheet,Text,View,TouchableOpacity,FlatList,ToastAndroid,}
     from "react-native";
   import React, { useState, useEffect } from "react";
   import { useNavigation } from "@react-navigation/native";
-  import { db } from "../firebase-config/firebase-config";
-  import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+  //import { db } from "../firebase-config/firebase-config";
+  import { collection, getDocs, doc, deleteDoc, getFirestore } from "firebase/firestore";
+  import {db} from "../config";
   
   export default function ViewOrderDetails() {
     const [getData, setGetData] = useState("");
     const navigation = useNavigation();
+    const db = getFirestore(db);
     const DatCollectinRef = collection(db, "OrderDetails"); //firebase databse reference
     const [ignored, forceUpdate] = React.useReducer((x) => x + 1, 0); //the method for refresh functions
   

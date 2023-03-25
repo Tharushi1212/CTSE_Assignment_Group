@@ -21,40 +21,20 @@ export default function LuxuryRoomInfo({ navigation }) {
   const [regCode, setRegCode] = useState('');
   const [password, setPassword] = useState('');
 
-  const registerUser = () => {
-    // const URL = `http://172.28.6.14:8000/user/signup`;
-    // const payload = {
-    //   Fullname,
-    //   email,
-    //   regCode,
-    //   password,
-    //   userRole,
-    // };
-    // axios
-    //   .post(URL, payload)
-    //   .then((res) => {
-    //     navigation.navigate('Login');
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     Alert.alert(
-    //       'Error',
-    //       'Registration Unsuccessful',
-    //       [{ text: 'Check Again' }],
-    //       { cancelable: false }
-    //     );
-    //   });
-  };
   return (
+    // Extra screen for room info
     <View style={styles.container}>
       <ImageBackground source={hotel} resizeMode="cover" style={styles.image}>
-        <Text style={styles.tituloTop}>Select Your Desire Room</Text>
+        <Text style={styles.tituloTop}>Tree House Room Info</Text>
 
         <View style={styles.square}>
           <View style={styles.topicContainer}>
             <Text style={styles.topicTop}>Luxury Rooms</Text>
             <Text style={styles.topicmid}>$8000</Text>
             <Text style={styles.topicBottom}>Top rated</Text>
+          </View>
+          <View>
+            <Image style={styles.imageicon} source={hotel} />
           </View>
           <View style={styles.descriptionStyle}>
             <Text style={styles.description}>
@@ -73,6 +53,28 @@ export default function LuxuryRoomInfo({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.menuStyle}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => navigation.navigate('LuxuryRoomInfo')}
+          >
+            <Text style={styles.textStyle}>Rooms</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => navigation.navigate('ConfirmRoomBooking')}
+          >
+            <Text style={styles.textStyle}>+</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => navigation.navigate('RoomList')}
+          >
+            <Text style={styles.textStyle}>List</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -89,6 +91,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto Serif',
     textAlign: 'center',
   },
+  imageicon: {
+    width: 400,
+    height: 190,
+    borderRadius: 5,
+    marginLeft: 5,
+  },
+  menuStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
+  },
+  textStyle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
   tituloTop: {
     fontSize: 30,
     color: 'white',
@@ -134,8 +155,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 30,
     marginTop: 20,
-    // position: 'absolute',
-    // right: 0,
   },
   buttonAlignment: {
     display: 'flex',

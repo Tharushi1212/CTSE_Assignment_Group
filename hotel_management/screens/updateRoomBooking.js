@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { updateDoc } from 'firebase/firestore';
+import { getFirestore, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
@@ -16,7 +16,9 @@ import {
 import { TouchableOpacity } from 'react-native';
 
 import hotel from '../assets/hotelRoom.jpg';
-import { FIRESTORE_DB } from '../config';
+import { db } from '../config';
+
+//import { FIRESTORE_DB } from '../config';
 
 export default function UpdateRoomBooking({ navigation, route }) {
   const listId = route.params.ListId;
@@ -24,6 +26,7 @@ export default function UpdateRoomBooking({ navigation, route }) {
   const [nights, setNights] = useState(listId.nights);
   const [rooms, setRooms] = useState(listId.rooms);
   const [NIC, setNic] = useState(listId.NIC);
+  const FIRESTORE_DB = getFirestore(db);
 
   useEffect(() => {
     console.log(listId.nights, 'update page');

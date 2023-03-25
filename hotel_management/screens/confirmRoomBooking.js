@@ -1,8 +1,9 @@
 import { async } from '@firebase/util';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
+import { db } from '../config';
 import {
   StyleSheet,
   Text,
@@ -16,13 +17,14 @@ import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import hotel from '../assets/hotelRoom.jpg';
-import { FIRESTORE_DB } from '../config';
+//import { FIRESTORE_DB } from '../config';
 
 export default function ConfirmRoomBooking({ navigation }) {
   const [Name, setFullname] = useState('');
   const [nights, setNights] = useState();
   const [rooms, setRooms] = useState();
   const [NIC, setNic] = useState();
+  const FIRESTORE_DB = getFirestore(db);
 
   //insert room booking details to databse
   const handleConfirmBooking = async () => {
@@ -36,7 +38,7 @@ export default function ConfirmRoomBooking({ navigation }) {
       alert('Booking succesful');
       clr();
     } catch (error) {
-      //   console.error(error.message);
+      console.error(error.message);
     }
   };
 

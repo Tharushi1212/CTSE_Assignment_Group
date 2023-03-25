@@ -25,7 +25,8 @@ import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import hotel from '../assets/hotelRoom.jpg';
-import { FIRESTORE_DB } from '../config';
+//import { FIRESTORE_DB } from '../config';
+import { db } from '../config';
 import UpdateRoomBooking from './updateRoomBooking';
 
 export default function RoomList({ navigation }) {
@@ -35,6 +36,7 @@ export default function RoomList({ navigation }) {
   const [rooms, setRooms] = useState('');
   const [nights, setNights] = useState('');
   const [Id, setId] = useState();
+  const FIRESTORE_DB = getFirestore(db);
 
   useEffect(() => {
     viewRooms();

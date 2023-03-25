@@ -2,13 +2,15 @@ import {
     StyleSheet,Text,View,TextInput,Image,Picker,TouchableOpacity,ScrollView,ToastAndroid,}
   from "react-native";
   import React, { useState } from "react";
-  import { db } from "../firebase-config/firebase-config";
+  //import { db } from "../firebase-config/firebase-config";
   import { useNavigation } from "@react-navigation/native";
-  import { collection, addDoc } from "firebase/firestore";
-  
+  import { collection, addDoc, getFirestore } from "firebase/firestore";
+  import {db} from "../config";
   export default function AddMenuItems() {
     const [data, setData] = useState("");
     const navigation = useNavigation();
+
+    const db = getFirestore(db);
     const DatCollectinRef = collection(db, "MenuItems"); //database collection reference
   
     //inputs handle function

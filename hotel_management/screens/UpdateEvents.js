@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { firebase } from "../config";
 
-const AddEvents = () => {
+const UpdateEvents = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -20,12 +20,31 @@ const AddEvents = () => {
   const [eventTimeTo, setEventTimeTo] = useState("");
 
   const navigation = useNavigation();
+  const route = useRoute();
+  const { eventId } = route.params;
 
-  const handleSubmit = async () => {
-    firebase
-      .firestore()
-      .collection("Events")
-      .add({
+  useEffect(() => {
+    const eventRef = firebase.firestore().collection("Events").doc(eventId);
+    eventRef
+      .get()
+      .then((doc) => {
+        const event = doc.data();
+        setName(event.name);
+        setPhone(event.phone);
+        setEmail(event.email);
+        setEventType(event.eventType);
+        setEventTimeFrom(event.eventTimeFrom);
+        setEventTimeTo(event.eventTimeTo);
+      })
+      .catch((error) => {
+        console.log("Error getting event:", error);
+      });
+  }, [eventId]);
+
+  const handleUpdate = async () => {
+    const eventRef = firebase.firestore().collection("Events").doc(eventId);
+    eventRef
+      .update({
         name,
         phone,
         email,
@@ -34,9 +53,21 @@ const AddEvents = () => {
         eventTimeTo,
       })
       .then(() => {
-        console.log("Event successfully added!");
-        alert("Event successfully added!");
+        console.log("Event successfully updated!");
+        alert("Event successfully updated!");
         navigation.navigate("InvitationHome", { event: event });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleDelete = async () => {
+    const eventRef = firebase.firestore().collection("Events").doc(eventId);
+    eventRef
+      .delete()
+      .then(() => {
+        console.log("Event successfully deleted!");
+        alert("Event successfully deleted!");
+        navigation.navigate("InvitationHome");
       })
       .catch((error) => console.log(error));
   };
@@ -47,14 +78,7 @@ const AddEvents = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <AntDesign name="arrowleft" size={24} color="black" />
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Create New Event</Text>
+      <Text style={styles.title}>Update Event</Text>
 
       <View style={styles.form}>
         <View style={styles.formGroup}>
@@ -179,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddEvents;
+export default UpdateEvents;
